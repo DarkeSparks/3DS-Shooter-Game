@@ -46,7 +46,7 @@ int main(int argc, char* argv[]) {
 		case _exit:
 		default:
 			DeInitGame(g);
-			exit(0);
+			return 0;
 			break;
 		}
 
