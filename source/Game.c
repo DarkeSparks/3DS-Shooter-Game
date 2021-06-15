@@ -295,27 +295,29 @@ void StateGameOver(Game* g) {
 
     }
 
-    Draw(*g, 0, C2D_Color32(0x0D, 0x0D, 0x0D, 0xFF));
+    if (g->state != _main) {
+        Draw(*g, 0, C2D_Color32(0x0D, 0x0D, 0x0D, 0xFF));
 
-		DrawRotatedTriangle(g->bpl->e, SetVector2f(9.0f, 8), g->bpl->e.angle-DEGTORAD(90), g->bpl->e.color);
+	    	DrawRotatedTriangle(g->bpl->e, SetVector2f(9.0f, 8), g->bpl->e.angle-DEGTORAD(90), g->bpl->e.color);
 
-		DrawRotatedTriangle(g->pl->e, SetVector2f(9.0f, 8), g->pl->e.angle-DEGTORAD(90), g->pl->e.color);
+	    	DrawRotatedTriangle(g->pl->e, SetVector2f(9.0f, 8), g->pl->e.angle-DEGTORAD(90), g->pl->e.color);
 
-		for (i = 0; i < ENEMY_SIZE; i++)
-			DrawRotatedTriangle((g->es + i)->e,
-				SetVector2f(16, 5), (g->es + i)->e.angle-DEGTORAD(90), (g->es + i)->e.color);
+	    	for (i = 0; i < ENEMY_SIZE; i++)
+	    		DrawRotatedTriangle((g->es + i)->e,
+	    			SetVector2f(16, 5), (g->es + i)->e.angle-DEGTORAD(90), (g->es + i)->e.color);
 
-        C2D_DrawRectSolid(0, 0, 0, SCREEN_SIZE.x, SCREEN_SIZE.y, C2D_Color32(0x00, 0x00, 0x00, 0xAF));
+            C2D_DrawRectSolid(0, 0, 0, SCREEN_SIZE.x, SCREEN_SIZE.y, C2D_Color32(0x00, 0x00, 0x00, 0xAF));
 
-        C2D_DrawText (&g->texts[5], C2D_WithColor | C2D_AtBaseline | C2D_AlignCenter, pos.x, pos.y, 0, 0.75, 0.75, C2D_Color32(0x82, 0x33, 0xFF, 0xFF));
+            C2D_DrawText (&g->texts[5], C2D_WithColor | C2D_AtBaseline | C2D_AlignCenter, pos.x, pos.y, 0, 0.75, 0.75, C2D_Color32(0x82, 0x33, 0xFF, 0xFF));
 
-	Draw(*g, 1, C2D_Color32(0x0A, 0x0A, 0x0A, 0xFF));
-        C2D_DrawRectSolid(selectionPos[1].x, selectionPos[1].y, 0, 100, 50, C2D_Color32(0x82, 0x33, 0xFF, 0xFF));
-        DrawButton(g->restart, SetVector2f(38 * 1.2f, 19 * 1.5f));
+	    Draw(*g, 1, C2D_Color32(0x0A, 0x0A, 0x0A, 0xFF));
+            C2D_DrawRectSolid(selectionPos[1].x, selectionPos[1].y, 0, 100, 50, C2D_Color32(0x82, 0x33, 0xFF, 0xFF));
+            DrawButton(g->restart, SetVector2f(38 * 1.2f, 19 * 1.5f));
 
-        DrawButton(g->back, SetVector2f(38 * 1.2f, 19 * 1.5f));
+            DrawButton(g->back, SetVector2f(38 * 1.2f, 19 * 1.5f));
 
-	Clear();
+	    Clear();
+	}
 }
 
 void StatePause(Game* g) {
@@ -342,25 +344,30 @@ void StatePause(Game* g) {
 
     }
 
-    Draw(*g, 0, C2D_Color32(0x0D, 0x0D, 0x0D, 0xFF));
+   if (g->state != _restart) {
+    	Draw(*g, 0, C2D_Color32(0x0D, 0x0D, 0x0D, 0xFF));
 
-		DrawRotatedTriangle(g->bpl->e, SetVector2f(9.0f, 8), g->bpl->e.angle-DEGTORAD(90), g->bpl->e.color);
+		    DrawRotatedTriangle(g->bpl->e, SetVector2f(9.0f, 8), g->bpl->e.angle-DEGTORAD(90), g->bpl->e.color);
 
-		DrawRotatedTriangle(g->pl->e, SetVector2f(9.0f, 8), g->pl->e.angle-DEGTORAD(90), g->pl->e.color);
+		    DrawRotatedTriangle(g->pl->e, SetVector2f(9.0f, 8), g->pl->e.angle-DEGTORAD(90), g->pl->e.color);
 
-		for (i = 0; i < ENEMY_SIZE; i++)
-			DrawRotatedTriangle((g->es + i)->e,
-				SetVector2f(16, 5), (g->es + i)->e.angle-DEGTORAD(90), (g->es + i)->e.color);
+		    for (i = 0; i < ENEMY_SIZE; i++)
+		    	DrawRotatedTriangle((g->es + i)->e,
+		    		SetVector2f(16, 5), (g->es + i)->e.angle-DEGTORAD(90), (g->es + i)->e.color);
 
-        C2D_DrawRectSolid(0, 0, 0, SCREEN_SIZE.x, SCREEN_SIZE.y, C2D_Color32(0x00, 0x00, 0x00, 0xAF));
+            C2D_DrawRectSolid(0, 0, 0, SCREEN_SIZE.x, SCREEN_SIZE.y, C2D_Color32(0x00, 0x00, 0x00, 0xAF));
 
-	Draw(*g, 1, C2D_Color32(0x0A, 0x0A, 0x0A, 0xFF));
-        C2D_DrawRectSolid(selectionPos[1].x, selectionPos[1].y, 0, 100, 50, C2D_Color32(0x82, 0x33, 0xFF, 0xFF));
-        DrawButton(g->back, SetVector2f(38 * 1.2f, 19 * 1.5f));
+	    Draw(*g, 1, C2D_Color32(0x0A, 0x0A, 0x0A, 0xFF));
+        
+        	C2D_DrawRectSolid(selectionPos[1].x, selectionPos[1].y, 0, 100, 50, C2D_Color32(0x82, 0x33, 0xFF, 0xFF));
+        	DrawButton(g->back, SetVector2f(38 * 1.2f, 19 * 1.5f));
 
-        DrawButton(g->endGame, SetVector2f(38 * 1.2f, 19 * 1.5f));
+        	DrawButton(g->endGame, SetVector2f(38 * 1.2f, 19 * 1.5f));
+        
+        
 
-	Clear();
+		Clear();
+	}
 }
 
 Game LoseHealth(Game g) {
