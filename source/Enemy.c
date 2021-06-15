@@ -74,7 +74,6 @@ void RotateEnemy(Enemy* en, Entity e) {
 
 	//Vector2f dif = SetVector2f(e->pos[0].x - pl->e.pos[0].x, (e->pos[0].y + 7) - (pl->e.pos[0].y + 10));
 	en->e.angle = atan2(avY, avX);
-	
 }
 
 void MoveHitEnemy(Enemy* es) {

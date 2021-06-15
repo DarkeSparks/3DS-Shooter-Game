@@ -15,7 +15,8 @@ Button* InitButton(Button* b, char* str, u32 color, Vector2f pos, Vector2f size,
 
 /* int ButtonPressed(Button* b, touchPosition pos) {
     if (pos.px >= b->pos.x && pos.px <= b->pos.x + b->size.x && pos.py >= b->pos.y && pos.py <= b->pos.y + b->size.y) {
-        return 1;        
+        if (ButtonDown(KEY_TOUCH)) 
+            return 1;
     }
 
     return 0;

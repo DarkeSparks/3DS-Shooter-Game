@@ -104,6 +104,8 @@ void StateMainMenu(Game* g) {
 
     if (ButtonDown(KEY_UP) &&   selectionPos[0].y > 45)   selectionPos[0].y -= 50;
     if (ButtonDown(KEY_DOWN) && selectionPos[0].y < 145)  selectionPos[0].y += 50;
+
+    // if (ButtonPressed(g->startGame, g->touch)) g->state = _game;
     
 
     if (ButtonDown(KEY_A | KEY_B | KEY_X | KEY_Y | KEY_START | KEY_SELECT)) {
@@ -192,13 +194,13 @@ void StateGame(Game* g) {
 
 
             // Lose Player Health
-            if (EntityOnEntity(g->pl->e.pos, (g->es + i)->e.pos)) {
+            if (TriangleOnTriangle(g->pl->e.pos, (g->es + i)->e.pos)) {
                 g->pl->health--;
                 g->state = _loselife;
             }
 
             // Move Enemy
-            if (EntityOnEntity(g->bpl->e.pos, (g->es + i)->e.pos) && !EntityOnEntity(g->pl->e.pos, (g->es + i)->e.pos)) {
+            if (TriangleOnTriangle(g->bpl->e.pos, (g->es + i)->e.pos) && !TriangleOnTriangle(g->pl->e.pos, (g->es + i)->e.pos)) {
                 g->pl->didShoot = 0;
                 g->score += 50;
                 MoveHitEnemy((g->es + i));
@@ -358,7 +360,7 @@ void StatePause(Game* g) {
             C2D_DrawRectSolid(0, 0, 0, SCREEN_SIZE.x, SCREEN_SIZE.y, C2D_Color32(0x00, 0x00, 0x00, 0xAF));
 
 	    Draw(*g, 1, C2D_Color32(0x0A, 0x0A, 0x0A, 0xFF));
-        
+
         	C2D_DrawRectSolid(selectionPos[1].x, selectionPos[1].y, 0, 100, 50, C2D_Color32(0x82, 0x33, 0xFF, 0xFF));
         	DrawButton(g->back, SetVector2f(38 * 1.2f, 19 * 1.5f));
 
@@ -494,7 +496,7 @@ void DeInitGame(Game g) {
 	g.pl = NULL;
 
     free(g.bpl);
-	g.bpl = NULL;
+    g.bpl = NULL;
 
     C2D_FontFree(g.font);
     C2D_TextBufDelete(g.static_textBuf);

@@ -19,6 +19,10 @@ void DrawRotatedTriangle(Entity e, Vector2f origin, float angle, u32 color) {
     e.pos[2].y = b3;
 
     C2D_DrawTriangle(e.pos[0].x, e.pos[0].y, color, e.pos[1].x, e.pos[1].y, color, e.pos[2].x, e.pos[2].y, color, 0);
+    // C2D_DrawCircleSolid(e.pos[0].x, e.pos[0].y, 0, 2, C2D_Color32(0xFF, 0xFF, 0xFF, 0xFF));
+    // C2D_DrawCircleSolid(e.pos[1].x, e.pos[1].y, 0, 2, C2D_Color32(0xFF, 0xFF, 0xFF, 0xFF));
+    // C2D_DrawCircleSolid(e.pos[2].x, e.pos[2].y, 0, 2, C2D_Color32(0xFF, 0xFF, 0xFF, 0xFF));
+
     //C2D_DrawTriangle(a1, b1, color, a2, b2, color, a3, b3, color, 0);
     //C2D_DrawCircleSolid(p, q, 0, 2, C2D_Color32(0xFF, 0xFF, 0xFF, 0xFF));
 }
