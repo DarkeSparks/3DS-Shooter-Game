@@ -7,6 +7,7 @@ You use the make file in the program to compile the code and build the project.
 Sorry if you die of heart failure because of my hacky code.
 
 -- Fixed Controlls
+
 -- Fixed Crashing Bug
 
 Itch.Io Page: https://itch.io/game/edit/1077712
