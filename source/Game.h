@@ -46,6 +46,7 @@ typedef struct Game {
     struct Button* pauseGame;
     
     touchPosition touch;
+    circlePosition pos;
 
     unsigned short firstTime : 1;
     unsigned short score, highscore;

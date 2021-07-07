@@ -40,7 +40,7 @@ Game InitGame(Game g) {
         "I Recreated This Game In Citro2D And C\n"
         "With No Other Libraries.");
 
-    C2D_TextFontParse(&g.texts[4], g.font, g.static_textBuf, "Press L Or R To Start\n\n\n\n\n\n\n\n\nUse The D Pad Or The C Stick To Move");
+    C2D_TextFontParse(&g.texts[4], g.font, g.static_textBuf, "Use The C Stick To Start Moving");
     C2D_TextFontParse(&g.texts[5], g.font, g.static_textBuf, "Game Over");
     
 
@@ -161,9 +161,11 @@ void StateGame(Game* g) {
     int i;
 
     if (g->pl->health > 3) g->pl->health = 3;
+
+    if (g->pl->didMove == 0) g->bpl->e.angle = g->pl->e.angle;
     
     TeleportPlayer(g->pl, SCREEN_SIZE);
-	MovePlayer(g->pl);
+	MovePlayer(g->pl, (Vector2f){ (float)g->pos.dx / (sizeof(g->pos.dx)+156) * 2, (float)g->pos.dy / (sizeof(g->pos.dy)+156) * 2});
 
     if (g->pl->didMove) {
         if (ButtonDown(KEY_START)) {
@@ -208,6 +210,9 @@ void StateGame(Game* g) {
     }
 
     if (g->score > g->highscore) g->highscore = g->score;
+
+    // g->score = (float)g->pos.dx / (sizeof(g->pos.dx)+255) * 2;
+    // g->highscore = (float)g->pos.dy / 156 * 2;
 
     C2D_TextBufClear(g->dynamic_textBuf);
 
@@ -385,7 +390,7 @@ Game LoseHealth(Game g) {
         }
 
         g.pl->didMove = 0;
-        g.pl->e.angle = DEGTORAD(90);
+        // g.pl->e.angle = DEGTORAD(90);
 
         g.pl->didShoot = 0;
 
@@ -394,7 +399,7 @@ Game LoseHealth(Game g) {
             g.bpl->e.pos[i].y = g.pl->e.pos[i].y;
         }
 
-        g.bpl->e.angle = DEGTORAD(90);
+        g.bpl->e.angle = g.pl->e.angle;
 
         pos[0].y += 12.5f/2;
 		pos[1].x -= 12.5f/2;
@@ -440,7 +445,7 @@ Game RestartGame(Game g) {
             g.bpl->e.pos[i].y = g.pl->e.pos[i].y;
         }
 
-        g.bpl->e.angle = DEGTORAD(90);
+        g.bpl->e.angle = g.pl->e.angle;
 
 		pos[0].y += 12.5f/2;
 		pos[1].x -= 12.5f/2;
@@ -468,6 +473,7 @@ Game RestartGame(Game g) {
 void Input(Game* g) {
     hidScanInput();
     hidTouchRead(&g->touch);
+    hidCircleRead(&g->pos);
 }
 
 u32 ButtonUp(int input) {

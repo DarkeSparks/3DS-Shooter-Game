@@ -49,34 +49,39 @@ void TeleportPlayer(Player* pl, const Vector2f screenSize) {
     
 }
 
-void MovePlayer(Player* pl) {
-    const float angleSpeed = 0.075f;
+void MovePlayer(Player* pl, Vector2f pos) {
+    const float angleSpeed = 0.075f * 4;
 
-    if (ButtonHeld(KEY_L)) {
+    pl->e.angle = atan2(pos.x, pos.y) + DEGTORAD(90);
+
+    /* if (ButtonHeld(KEY_L)) {
         pl->didMove = 1;
 
         pl->e.angle -= angleSpeed;
 
-        if (pl->e.angle < 0) pl->e.angle += 2 * M_PI;
+        // if (pl->e.angle < 0) pl->e.angle += 2 * M_PI;
 
         pl->deltaPos = SetVector2f(cos(pl->e.angle)*5, sin(pl->e.angle)*5);
-    } 
+    } */
 
-    if (ButtonHeld(KEY_R)) {
+    //if (ButtonHeld(KEY_A))  
+        // if (pl->e.angle > 2 * M_PI) pl->e.angle -= 2 * M_PI;
+
+    
+
+    //if (ButtonHeld(KEY_CPAD_UP))   {
+    
+    if (abs(pos.x) > 0.0125f || abs(pos.y) > 0.0125f) {
         pl->didMove = 1;
-        pl->e.angle += angleSpeed;
-
-        if (pl->e.angle > 2 * M_PI) pl->e.angle -= 2 * M_PI;
-
+        
         pl->deltaPos = SetVector2f(cos(pl->e.angle)*5, sin(pl->e.angle)*5);
-    }
 
-    if (ButtonHeld(KEY_CPAD_UP))   {
         for (int i = 0; i < 3; i++) {
-            pl->e.pos[i].x -= (pl->deltaPos.x) * 0.5f;
-            pl->e.pos[i].y -= (pl->deltaPos.y) * 0.5f; 
+            pl->e.pos[i].x -= pl->deltaPos.x * angleSpeed;
+            pl->e.pos[i].y -= pl->deltaPos.y * angleSpeed; 
         }
     }
+    //}
 }
 
 void SpawnBullet(Player* pl, Bullet* b) {

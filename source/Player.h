@@ -18,7 +18,7 @@ typedef struct Player {
 
 Player* InitPlayer(Player* pl, Vector2f pos[3], float angle, u32 color, short health);
 void TeleportPlayer(Player* pl, const Vector2f screenSize);
-void MovePlayer(Player* pl);
+void MovePlayer(Player* pl, Vector2f pos);
 
 void SpawnBullet(Player* pl, Bullet* b);
 void DestroyBullet(Player* pl, Bullet* b, Vector2f screenSize);
