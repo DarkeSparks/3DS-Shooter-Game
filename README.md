@@ -5,3 +5,8 @@ A 3DS Homebrew made in a week. The project was made me as a test if I could prog
 You either need a hacked 3DS or Citra Nightly in order to run the program. 
 You use the make file in the program to compile the code and build the project. 
 Sorry if you die of heart failure because of my hacky code.
+
+-- Fixed Controlls
+-- Fixed Crashing Bug
+
+Itch.Io Page: https://itch.io/game/edit/1077712
