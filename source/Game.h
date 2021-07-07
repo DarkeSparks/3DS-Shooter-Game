@@ -1,8 +1,14 @@
 #ifndef GAME_H
 #define GAME_H
 
+#include <3ds.h>
 #include <citro2d.h>
+
 #include <stdlib.h>
+
+#include <string.h>
+#include <stdio.h>
+#include <unistd.h>
 
 #include "Math.h"
 #include "Rotated.h"
@@ -19,7 +25,7 @@
 
 typedef struct Game {
     enum GameState {
-        _main = 0, _game, _restart, _gameover, _loselife, _credits, _paused, _exit
+        _main = 0, _game, _restart, _gameover, _loselife, _credits, _paused, _exitGame
     } state;
 
     C3D_RenderTarget* top;
@@ -66,6 +72,7 @@ void Input(Game* g);
 u32   ButtonUp(int input);
 u32 ButtonDown(int input);
 u32 ButtonHeld(int input);
+
 
 void Draw(Game g, int side, u32 clrClear);
 void Clear();

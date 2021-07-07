@@ -3,7 +3,7 @@
 Enemy* InitEnemy(Enemy* en, Vector2f pos[3], float angle, u32 color) {
     en->e = *InitEntity(&en->e, pos, angle, color);
     en->side = rand() % 2;
-    en->speed = (2.5f + RANDFLOAT(1.0f)) / 1.5f;
+    en->speed = (2.5f + RANDFLOAT(1.0f)) / 1.875f;
 
     return en;
 }

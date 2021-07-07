@@ -19,7 +19,7 @@ int main(int argc, char* argv[]) {
 	g.state = _main;
 
 	// Main loop
-	while (aptMainLoop())
+	while (aptMainLoop() && g.state != _exitGame)
 	{
 		Input(&g);
 
@@ -43,7 +43,6 @@ int main(int argc, char* argv[]) {
 		case _paused:
 			StatePause(&g);
 			break;
-		case _exit:
 		default:
 			DeInitGame(g);
 			return 0;

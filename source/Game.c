@@ -1,3 +1,5 @@
+#include <stdio.h>
+
 #include "Game.h"
 
 static Vector2f selectionPos[2] = {(Vector2f){105, 45}, (Vector2f){101.25f, 52}};
@@ -11,10 +13,7 @@ Game InitGame(Game g) {
     //consoleInit(GFX_BOTTOM, NULL);
 
     srand((unsigned)time(NULL));
-
-    //g.top = C2D_CreateScreenTarget(GFX_TOP, GFX_LEFT);
-    //g.bot = C2D_CreateScreenTarget(GFX_BOTTOM, GFX_LEFT);
-
+    
     {
         Game t = {_main, C2D_CreateScreenTarget(GFX_TOP, GFX_LEFT), C2D_CreateScreenTarget(GFX_BOTTOM, GFX_LEFT), malloc(sizeof(Player)),
                 malloc(sizeof(Bullet)), calloc(ENEMY_SIZE, sizeof(Enemy)), malloc(sizeof(Button)), malloc(sizeof(Button)),
@@ -27,7 +26,7 @@ Game InitGame(Game g) {
 
 
     g.font = C2D_FontLoad("romfs:/gfx/FFFFORWA.bcfnt");
-    if (!g.font) { svcBreak(USERBREAK_PANIC); DeInitGame(g); exit(0); }
+    if (!g.font) { svcBreak(USERBREAK_PANIC); DeInitGame(g); g.state = _exitGame; }
 
     g.static_textBuf  = C2D_TextBufNew(4096);
     g.dynamic_textBuf = C2D_TextBufNew(4096);
@@ -105,9 +104,6 @@ void StateMainMenu(Game* g) {
     if (ButtonDown(KEY_UP) &&   selectionPos[0].y > 45)   selectionPos[0].y -= 50;
     if (ButtonDown(KEY_DOWN) && selectionPos[0].y < 145)  selectionPos[0].y += 50;
 
-    // if (ButtonPressed(g->startGame, g->touch)) g->state = _game;
-    
-
     if (ButtonDown(KEY_A | KEY_B | KEY_X | KEY_Y | KEY_START | KEY_SELECT)) {
         switch ((int)selectionPos[0].y) {
             case 45:
@@ -117,7 +113,7 @@ void StateMainMenu(Game* g) {
                 g->state = _credits;
                 break;
             case 145:
-                g->state = _exit;
+                g->state = _exitGame;
                 break;
         }
     }
@@ -474,9 +470,17 @@ void Input(Game* g) {
     hidTouchRead(&g->touch);
 }
 
-u32 ButtonUp  (int input) { return hidKeysUp()   & input; };
-u32 ButtonDown(int input) { return hidKeysDown() & input; };
-u32 ButtonHeld(int input) { return hidKeysHeld() & input; };
+u32 ButtonUp(int input) {
+    return hidKeysUp() & input; 
+}
+
+u32 ButtonDown(int input) {
+    return hidKeysDown() & input; 
+}
+
+u32 ButtonHeld(int input) {
+    return hidKeysHeld() & input; 
+}
 
 void Draw(Game g, int side, u32 clrClear) {
     C3D_FrameBegin(C3D_FRAME_SYNCDRAW);
@@ -489,6 +493,7 @@ void Clear() {
 }
 
 void DeInitGame(Game g) {
+
     free(g.es);
 	g.es = NULL;
 
@@ -501,9 +506,9 @@ void DeInitGame(Game g) {
     C2D_FontFree(g.font);
     C2D_TextBufDelete(g.static_textBuf);
 
-    svcBreak(USERBREAK_PANIC);
-
     C2D_Fini();
 	C3D_Fini();
+
+    romfsExit();
 	gfxExit();
 }

@@ -13,14 +13,9 @@ Button* InitButton(Button* b, char* str, u32 color, Vector2f pos, Vector2f size,
     return b;
 }
 
-/* int ButtonPressed(Button* b, touchPosition pos) {
-    if (pos.px >= b->pos.x && pos.px <= b->pos.x + b->size.x && pos.py >= b->pos.y && pos.py <= b->pos.y + b->size.y) {
-        if (ButtonDown(KEY_TOUCH)) 
-            return 1;
-    }
-
-    return 0;
-} */
+int ButtonPressed(Button* b, touchPosition pos) {
+    return (pos.px >= b->pos.x && pos.px <= b->pos.x + b->size.x && pos.py >= b->pos.y && pos.py <= b->pos.y + b->size.y && ButtonDown(KEY_TOUCH));
+}
 
 void DrawButton(Button* b, Vector2f origin) {
     C2D_DrawRectSolid(b->pos.x,  b->pos.y, 0, b->size.x, b->size.y, b->color);

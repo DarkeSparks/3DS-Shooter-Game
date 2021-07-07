@@ -18,7 +18,7 @@ typedef struct Button {
 } Button;
 
 Button* InitButton(Button* b, char* str, u32 color, Vector2f pos, Vector2f size, float textSize, C2D_Font font, C2D_TextBuf textbuf);
-// int ButtonPressed(Button* b, touchPosition pos);
+int ButtonPressed(Button* b, touchPosition pos);
 void DrawButton(Button* b, Vector2f origin);
 
 #endif
