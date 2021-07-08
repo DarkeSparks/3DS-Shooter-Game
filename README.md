@@ -10,4 +10,4 @@ Sorry if you die of heart failure because of my hacky code.
 
 -- Fixed Crashing Bug
 
-Itch.Io Page: https://itch.io/game/edit/1077712
+Itch.Io Page: https://wildestbeast.itch.io/shooter-game
