@@ -32,7 +32,7 @@ Game InitGame(Game g) {
     g.dynamic_textBuf = C2D_TextBufNew(4096);
 
     C2D_TextFontParse(&g.texts[0], g.font, g.static_textBuf, "Shooter Game");
-    C2D_TextFontParse(&g.texts[1], g.font, g.static_textBuf, "By Derrick Wilder");
+    C2D_TextFontParse(&g.texts[1], g.font, g.static_textBuf, "By DarkSparks");
     C2D_TextFontParse(&g.texts[2], g.font, g.static_textBuf, "Credits");
     C2D_TextFontParse(&g.texts[3], g.font, g.static_textBuf, "This Game Was An Inspiration To\n"
         "A Game That I Made When I Started Out\n"
