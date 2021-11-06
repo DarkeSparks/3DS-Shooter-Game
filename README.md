@@ -10,4 +10,8 @@ Sorry if you die of heart failure because of my hacky code.
 
 -- Fixed Crashing Bug
 
+How To Compile:
+  - You need to install DevKitPro and the 3DS package with it. ( Link To DKP: https://devkitpro.org/wiki/devkitPro_pacman )
+  - Onced downloaded the project, all you need to do is type make
+
 Itch.Io Page: https://wildestbeast.itch.io/shooter-game
